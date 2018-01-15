@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="body1">
+        <br>
+        <h1>Оформление заказа</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="add-form">
+                {% csrf_token %}
+                <div class="course_add">
+                    <h1>Компьютер:</h1>
+                    <div class="data-and-error">
+                        <select name="id_comp" required id="id_computer">
+                            <option value="" selected>Не выбрано</option>
+                            {% for computer in computers %}
+                                <option value="{{ computer.id_computer }}">{{ computer }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+            <br><button type="submit" id="btn_add">Заказать</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

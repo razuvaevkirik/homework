@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="body1">
+        <br>
+        <h1>Добавление нового компьютера</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="add-form">
+                {% csrf_token %}
+                <div class="computer_add">
+                    <label for="id_name_computer">Компьютер:</label>
+                    <div class="data-and-error">
+                        <input type="text" name="name_computer" maxlength="100" required id="id_name_computer"/>
+                        <h5 id="error_name_computer">Заполните это поле</h5>
+                    </div>
+                </div>
+                <div class="computer_add">
+                    <label for="id_photo">Фото:</label>
+                    <div class="data-and-error">
+                        <input type="file" name="photo_computer" id="id_photo"/>
+                    </div>
+                </div>
+                <div class="computer_add">
+                    <label for="id_model">Модель:</label>
+                    <div class="data-and-error">
+                        <div class="data-and-error">
+                            <input type="text" name="model_computer" maxlength="100" required id="id_model_computer"/>
+                            <h5 id="error_model_computer">Заполните это поле</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="computer_add">
+                    <label for="id_company">Производитель:</label>
+                    <div class="data-and-error">
+                        <input type="text" name="company_computer" maxlength="100" required id="id_company_computer"/>
+                        <h5 id="error_company_computer">Заполните это поле</h5>
+                    </div>
+                </div>
+                <div class="computer_add">
+                    <label for="id_price">Цена:</label>
+                    <div class="data-and-error">
+                        <input type="text" name="price_computer" maxlength="100" required id="id_price_computer"/>
+                        <h5 id="error_price_computer">Заполните это поле</h5>
+                    </div>
+                </div>
+                <div class="computer_add">
+                    <label for="id_charactristics">Характеристики:</label>
+                    <div class="data-and-error">
+                        <input type="text" name="characteristics_computer" maxlength="100" required id="id_characteristics_computer"/>
+                        <h5 id="error_characteristics_computer">Заполните это поле</h5>
+                    </div>
+                </div>
+                <button type="submit" id="btn_add">Добавить компьютер</button>
+                <br>
+            </div>
+        </form>
+    </div>
+{% endblock %}

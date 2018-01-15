@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="header1">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1><br>Таблица заказов<br></h1>
+                <table class="table table-hover table-inverse">
+                <tr>
+                    <th>№ заказа</th>
+                    <td>Название компьютера</td>
+                    <td>Логин пользователя</td>
+                </tr>
+                    {% for Order in object_list %}
+                    <tr>
+                        <th scope="row">{{ Order.id_order }}</th>
+                        <td> {{ Order.id_comp }} </td>
+                        <td>{{ Order.get_users }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

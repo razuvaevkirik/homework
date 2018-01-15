@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="body1" style="text-align: left">
+        {% if object_list %}
+            <table id="computers">
+                <div class="computer">
+                    {% for computer in object_list %}
+                        <a href="/computer/{{ computer.id_computer }}" class="computer-element">
+                            <div class="computer-photo">
+                                {% if computer.photo_computer %}
+                                    <img class="img-course" src="{{ computer.photo_computer.url }}" width="100%" height="100%">
+                                {% endif %}
+                            </div>
+                            <span class="computer-name">{{ computer.name_computer }}</span><br>
+                            <span class="price-computer">{{ computer.price_computer }}</span><br>
+                            <span class="price-computer">{{ computer.model_computer }}</span><br>
+                            <span class="price-computer">{{ computer.company_computer }}</span><br>
+                        </a>
+                    {% endfor %}
+                </div>
+            </table>
+        {% endif %}
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a class="aquo" href="/computers?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                        {% else %}
+                            <span class="unavailable" href="">&laquo;</span>
+                        {% endif %}
+                        {% for page in page_obj.paginator.page_range %}
+                            {% if page %}
+                                {% ifequal page page_obj.number %}
+                                    <span class="current-page" href="">{{ page }}</span>
+                                {% else %}
+                                    <a href="/computers?page={{ page }}" class="page">{{ page }}</a>
+                                {% endifequal %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a class="aquo" href="/computers?page={{ page_obj.next_page_number }}">&raquo;</a>
+                        {% else %}
+                            <span class="unavailable" href="">&raquo;</span>
+                        {% endif %}
+                        <span hidden id="per-page">{{ page_obj.paginator.per_page }}</span>
+                    </span>
+                </div>
+            {% endif %}
+        {% if user.is_superuser %}
+            <a href="{% url 'computer_add' %}">
+                <div class="add-button">&plus;</div>
+            </a>
+            <a href="#computer-add-modal" data-toggle="modal">
+                <div class="add-button" style="color: black; bottom: 15%; border-color: #000000">&plus;</div>
+            </a>
+        {% endif %}
+        <div id="computer-add-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h2 class="modal-title">Добавление нового компьютера</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="add-form container">
+                                {% csrf_token %}
+                                <div class="computer_add">
+                                    <label for="id_name_computer">Компьютер:</label>
+                                    <div class="data-and-error">
+                                        <input type="text" name="name_computer" maxlength="100" required
+                                               id="id_name_computer"/>
+                                        <h5 id="error_name_computer">Заполните это поле</h5>
+                                    </div>
+                                </div>
+                                <div class="computer_add">
+                                    <label for="id_photo">Фото:</label>
+                                    <div class="data-and-error">
+                                        <input type="file" name="photo_computer" id="id_photo"/>
+                                    </div>
+                                </div>
+                                <div class="computer_add">
+                                    <label for="id_name_computer">Модель:</label>
+                                    <div class="data-and-error">
+                                        <div class="data-and-error">
+                                        <input type="text" name="model_computer" maxlength="100" required
+                                               id="id_name_computer"/>
+                                        <h5 id="error_model_computer">Заполните это поле</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="computer_add">
+                                    <label for="id_company">Производитель:</label>
+                                    <div class="data-and-error">
+                                        <input type="text" name="company_computer" maxlength="100" required
+                                               id="id_company_computer"/>
+                                        <h5 id="error_company_computer">Заполните это поле</h5>
+                                    </div>
+                                </div>
+                                <div class="computer_add">
+                                    <label for="id_price">Цена:</label>
+                                    <div class="data-and-error">
+                                        <input type="text" name="price_computer" maxlength="100" required
+                                               id="id_price_computer"/>
+                                        <h5 id="error_price_computer">Заполните это поле</h5>
+                                    </div>
+                                </div>
+                                <div class="computer_add">
+                                    <label for="id_charactristics">Характеристики:</label>
+                                    <div class="data-and-error">
+                                        <input type="text" name="characteristics_computer" maxlength="100" required
+                                               id="id_characteristics_computer"/>
+                                        <h5 id="error_characteristics_computer">Заполните это поле</h5>
+                                    </div>
+                                </div>
+                                <button type="submit" id="btn_add">Добавить компьютер</button>
+                                <br>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

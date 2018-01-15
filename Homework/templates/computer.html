@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <h1>Computer id {{ computer.id_computer }}</h1>
+    <div class="computer-photo">
+        {% if computer.photo_computer %}
+            <img class="img-course" src="{{ computer.photo_computer.url }}" width="10%" height="10%">
+        {% endif %}
+    </div>
+        <a class="computer-name">Название: {{ computer.name_computer }}</a><br>
+        <a class="price-computer">Модель: {{ computer.model_computer }}</a><br>
+        <a class="price-computer">Производитель: {{ computer.company_computer }}</a><br>
+        <a class="price-computer">Цена: {{ computer.price_computer }}</a><br>
+{% endblock %}
