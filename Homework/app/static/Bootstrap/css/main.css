@@ -285,6 +285,14 @@ a:hover .add-button {
     height: 50%;
 }
 
+#compik {
+    margin-left: 50px;
+}
+
+#comp-order {
+    margin-left: 50px;
+}
+
 a.computer-element:hover .course-name, a.course-element:hover .course-tutor {
     color: white;
 }

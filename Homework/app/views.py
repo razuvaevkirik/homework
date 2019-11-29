@@ -63,7 +63,7 @@ def order_add(request):
     if form.is_valid():
         instance = form.save()
         Order.objects.get(id_order=instance.pk).id_user.add(request.user.id)
-        return HttpResponseRedirect(reverse('main'))
+        return HttpResponseRedirect(reverse('computers_url'))
     return render(request, "order_add.html", {"computers": computers, "form": form})
 
 

@@ -1,14 +1,30 @@
 {% extends 'base.html' %}
 
 {% block body1 %}
+    <script>
+        function order_alert() {
+            alert("Компик успешно заказан :) Закажи еще два")
+        }
+    </script>
+
     <h1>Computer id {{ computer.id_computer }}</h1>
-    <div class="computer-photo">
+    <div class="computer-photo" id="compik">
         {% if computer.photo_computer %}
             <img class="img-course" src="{{ computer.photo_computer.url }}" width="10%" height="10%">
         {% endif %}
     </div>
-        <a class="computer-name">Название: {{ computer.name_computer }}</a><br>
-        <a class="price-computer">Модель: {{ computer.model_computer }}</a><br>
-        <a class="price-computer">Производитель: {{ computer.company_computer }}</a><br>
-        <a class="price-computer">Цена: {{ computer.price_computer }}</a><br>
+
+    <div id="comp-order">
+        <span class="computer-name">Название: {{ computer.name_computer }}</span><br>
+        <span class="price-computer">Модель: {{ computer.model_computer }}</span><br>
+        <span class="price-computer">Производитель: {{ computer.company_computer }}</span><br>
+        <span class="price-computer">Цена: {{ computer.price_computer }}</span><br><br>
+
+        <form method="POST" enctype="multipart/form-data" action="{% url 'order' %}">
+            {% csrf_token %}
+            <button class="btn btn-primary" id="order-comp" type="submit" onclick="order_alert()">Заказать эту пушку
+            </button>
+            <input name="id_comp" type="hidden" value="{{ computer.id_computer }}">
+        </form>
+    </div>
 {% endblock %}
